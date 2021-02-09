@@ -100,7 +100,6 @@ export class Multiselect extends React.Component {
 
   listenerCallback() {
     this.searchBox.current.focus();
-    this.searchWrapper.current.focus();
   }
 
   componentWillUnmount() {
@@ -466,8 +465,9 @@ export class Multiselect extends React.Component {
             autoComplete="off"
             disabled={singleSelect || disable}
           />
-           <i
+          <i
             className={`icon_cancel ${ms.icon_down_dir}`}
+            style={toggleOptionsList ? { transform: 'rotate(180deg)',top:'26%' } : {}}
           />
         </div>
         <div
