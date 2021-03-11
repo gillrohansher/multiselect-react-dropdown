@@ -22,9 +22,12 @@
 .multiSelectContainer input:focus {
   outline: none;
 }
+.bgSelected{
+  background-color: rgb(242, 242, 252)!important;
+}
 .chip {
   padding: 4px 10px;
-  background: #0096fb;
+  background: rgb(242, 242, 252);
   margin-right: 5px;
   margin-bottom: 5px;
   border-radius: 10px;
@@ -70,7 +73,7 @@
   padding: 10px 10px;
 }
 .multiSelectContainer li:hover {
-  background: #0096fb;
+  background: rgb(242, 242, 252);
   color: #fff;
   cursor: pointer;
 }
@@ -82,7 +85,7 @@
   opacity: 0.5;
 }
 .highlightOption {
-  background: #0096fb;
+  background: rgb(242, 242, 252);
   color: #ffffff;
 }
 .displayBlock {

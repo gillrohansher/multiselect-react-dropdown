@@ -42,6 +42,7 @@ export class Multiselect extends React.Component {
     this.isDisablePreSelectedValues = this.isDisablePreSelectedValues.bind(this);
     this.renderGroupByOptions = this.renderGroupByOptions.bind(this);
     this.renderNormalOption = this.renderNormalOption.bind(this);
+    this.renderTableViewOptions = this.renderTableViewOptions.bind(this);
     this.listenerCallback = this.listenerCallback.bind(this);
     this.resetSelectedValues = this.resetSelectedValues.bind(this);
     this.getSelectedItems = this.getSelectedItems.bind(this);
@@ -302,7 +303,7 @@ export class Multiselect extends React.Component {
   }
 
   renderOptionList() {
-    const { groupBy, style, emptyRecordMsg, loading, loadingMessage = 'loading...', renderCustomButton } = this.props;
+    const { groupBy, style, emptyRecordMsg, loading, loadingMessage = 'loading...', renderCustomButton, tableView = false } = this.props;
     const { options } = this.state;
     if (loading) {
       return (
@@ -311,6 +312,9 @@ export class Multiselect extends React.Component {
           {typeof loadingMessage !== 'string' && loadingMessage}
         </ul>
       );
+    }
+    if( tableView ) {
+      return this.renderTableViewOptions();
     }
     return (
       <ul className={`optionContainer`} style={style['optionContainer']}>
@@ -355,30 +359,100 @@ export class Multiselect extends React.Component {
   }
 
   renderNormalOption() {
-    const { isObject = false, displayValue, showCheckbox, style, singleSelect } = this.props;
+    const { isObject = false, displayValue, showCheckbox, style, singleSelect, isMobileView, secondColumnKey } = this.props;
     const { highlightOption } = this.state;
     return this.state.options.map((option, i) => (
-          <li
-            key={`option${i}`}
+      <div>
+        <li
+          key={`option${i}`}
+          style={style['option']}
+          className={`
+            ${highlightOption === i ? `${ms.highlightOption} highlight` : ""} 
+            ${this.fadeOutSelection(option) && ms.disableSelection} 
+            ${this.isDisablePreSelectedValues(option) && ms.disableSelection} option
+          `}
+          onClick={() => this.onSelectItem(option)}
+        >
+          {showCheckbox && !singleSelect && (
+            <input
+              type="checkbox"
+              readOnly
+              className={`checkbox ${ms.checkbox}`}
+              checked={this.isSelectedValue(option)}
+            />
+          )}
+          {isObject ? option[displayValue] : (option || '').toString()}
+          {isMobileView && <li
             style={style['option']}
             className={`
               ${highlightOption === i ? `${ms.highlightOption} highlight` : ""} 
               ${this.fadeOutSelection(option) && ms.disableSelection} 
               ${this.isDisablePreSelectedValues(option) && ms.disableSelection} option
             `}
-            onClick={() => this.onSelectItem(option)}
           >
-            {showCheckbox && !singleSelect && (
-              <input
-                type="checkbox"
-                readOnly
-                className={`checkbox ${ms.checkbox}`}
-                checked={this.isSelectedValue(option)}
-              />
-            )}
-            {isObject ? option[displayValue] : (option || '').toString()}
-          </li>
+            {option[secondColumnKey]}
+          </li>}
+        </li>
+      </div>
     ));
+  }
+
+  renderTableViewOptions () {
+    const { isObject = false, displayValue, showCheckbox, style, singleSelect, secondColumnKey, tableHeaders, renderCustomButton } = this.props;
+    const { highlightOption } = this.state;
+    return (
+      <table>
+        <thead>
+          {
+            tableHeaders.map(tHead => {
+              return <th>{tHead.heading}</th>
+            })
+          }
+        </thead>
+        <tbody>
+          {
+            this.state.options.map((option, i) => (
+              <tr
+                onClick={() => this.onSelectItem(option)}>
+                <td
+                  key={`option${i}`}
+                  style={style['option']}
+                  className={`
+                    ${highlightOption === i ? `${ms.highlightOption} highlight` : ""} 
+                    ${this.fadeOutSelection(option) && ms.disableSelection} 
+                    ${this.isDisablePreSelectedValues(option) && ms.disableSelection} option
+                  `}
+                >
+                  {isObject ? option[displayValue] : (option || '').toString()}
+                </td>
+                <td
+                  key={`option${i}`}
+                  style={style['option']}
+                  className={`
+                    ${highlightOption === i ? `${ms.highlightOption} highlight` : ""} 
+                    ${this.fadeOutSelection(option) && ms.disableSelection} 
+                    ${this.isDisablePreSelectedValues(option) && ms.disableSelection} option
+                  `}
+                >
+                  {isObject ? option[secondColumnKey] : (option || '').toString()}
+                </td>
+                <td>
+                  {showCheckbox && !singleSelect && (
+                    <input
+                      type="checkbox"
+                      readOnly
+                      className={`checkbox ${ms.checkbox}`}
+                      checked={this.isSelectedValue(option)}
+                    />
+                  )}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+        {renderCustomButton}
+      </table>
+    )
   }
 
   renderSelectedList() {
@@ -468,7 +542,7 @@ export class Multiselect extends React.Component {
           />
           <i
             className={`icon_cancel ${ms.icon_down_dir}`}
-            style={toggleOptionsList ? { transform: 'rotate(180deg)', top:'26%' } : {}}
+            style={toggleOptionsList ? { transform: 'rotate(180deg)' } : {}}
           />
         </div>
         <div
