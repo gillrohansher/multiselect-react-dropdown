@@ -159,7 +159,7 @@ export class Multiselect extends React.Component {
   onChange(event) {
     const { onSearch } = this.props;
     this.setState(
-      { inputValue: event.target.value },
+      { inputValue: event.target.value,toggleOptionsList:true},
       this.filterOptionsByInput
     );
     if (onSearch) {
@@ -250,7 +250,7 @@ export class Multiselect extends React.Component {
       }
     });
     if (!this.props.closeOnSelect) {
-      this.searchBox.current.focus();
+      this.setState({toggleOptionsList:true})
     }
   }
 
@@ -282,7 +282,8 @@ export class Multiselect extends React.Component {
       }
     });
     if (!this.props.closeOnSelect) {
-      this.searchBox.current.focus();
+      // this.searchBox.current.focus();
+      this.setState({toggelOptionList:true})
     }
   }
 
@@ -369,7 +370,10 @@ export class Multiselect extends React.Component {
           className={`
             ${highlightOption === i ? `${ms.highlightOption} highlight` : ""} 
             ${this.fadeOutSelection(option) && ms.disableSelection} 
-            ${this.isDisablePreSelectedValues(option) && ms.disableSelection} option
+            ${this.isDisablePreSelectedValues(option) && ms.disableSelection}
+            ${this.isSelectedValue(option) ? "bgSelected":""}
+            option
+            
           `}
           onClick={() => this.onSelectItem(option)}
         >
@@ -412,27 +416,22 @@ export class Multiselect extends React.Component {
         <tbody>
           {
             this.state.options.map((option, i) => (
-              <tr
+              <tr 
+              key={`option${i}`}
+              style={style['option']}
+              className={`
+                ${highlightOption === i ? `${ms.highlightOption} highlight` : ""} 
+                ${this.fadeOutSelection(option) && ms.disableSelection} 
+                ${this.isDisablePreSelectedValues(option) && ms.disableSelection} 
+                ${this.isSelectedValue(option) ? "bgSelected":""}
+                option
+              `}
                 onClick={() => this.onSelectItem(option)}>
-                <td
-                  key={`option${i}`}
-                  style={style['option']}
-                  className={`
-                    ${highlightOption === i ? `${ms.highlightOption} highlight` : ""} 
-                    ${this.fadeOutSelection(option) && ms.disableSelection} 
-                    ${this.isDisablePreSelectedValues(option) && ms.disableSelection} option
-                  `}
-                >
+                <td>
                   {isObject ? option[displayValue] : (option || '').toString()}
                 </td>
                 <td
-                  key={`option${i}`}
-                  style={style['option']}
-                  className={`
-                    ${highlightOption === i ? `${ms.highlightOption} highlight` : ""} 
-                    ${this.fadeOutSelection(option) && ms.disableSelection} 
-                    ${this.isDisablePreSelectedValues(option) && ms.disableSelection} option
-                  `}
+               
                 >
                   {isObject ? option[secondColumnKey] : (option || '').toString()}
                 </td>
@@ -533,7 +532,7 @@ export class Multiselect extends React.Component {
             onChange={this.onChange}
             value={inputValue}
             onFocus={this.toggelOptionList}
-            onBlur={() => setTimeout(this.toggelOptionList, 200)}
+            // onBlur={() => setTimeout(this.toggelOptionList, 200)}
             placeholder={((singleSelect && selectedValues.length) || (hidePlaceholder && selectedValues.length)) ? '' : placeholder}
             onKeyDown={this.onArrowKeyNavigation}
             style={style['inputField']}
@@ -542,7 +541,7 @@ export class Multiselect extends React.Component {
           />
           <i
             className={`icon_cancel ${ms.icon_down_dir}`}
-            style={toggleOptionsList ? { transform: 'rotate(180deg)' } : {}}
+            style={toggleOptionsList ? { transform: 'rotate(180deg)', top:'26%' } : {}}
           />
         </div>
         <div
