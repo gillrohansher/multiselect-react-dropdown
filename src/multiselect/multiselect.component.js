@@ -521,7 +521,7 @@ export class Multiselect extends React.Component {
       <div className={`multiselect-container ${ms.multiSelectContainer} ${disable ? `${ms.disable_ms} disable_ms` : ''}`} id={id || 'multiselectContainerReact'} style={style['multiselectContainer']}>
         <div className={`search-wrapper ${ms.searchWrapper} ${singleSelect ? ms.singleSelect : ''}`} 
           ref={this.searchWrapper} style={style['searchBox']} 
-          onClick={singleSelect ? this.toggelOptionList : () => {}}
+          // onClick={singleSelect ? this.toggelOptionList : () => {}}
         >
           {this.renderSelectedList()}
           <input
@@ -532,7 +532,7 @@ export class Multiselect extends React.Component {
             onChange={this.onChange}
             value={inputValue}
             onFocus={this.toggelOptionList}
-            // onBlur={() => setTimeout(this.toggelOptionList, 200)}
+            onBlur={this.toggelOptionList}
             placeholder={((singleSelect && selectedValues.length) || (hidePlaceholder && selectedValues.length)) ? '' : placeholder}
             onKeyDown={this.onArrowKeyNavigation}
             style={style['inputField']}
