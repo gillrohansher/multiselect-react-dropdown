@@ -531,7 +531,7 @@ export class Multiselect extends React.Component {
             id={`${id || 'search'}_input`}
             onChange={this.onChange}
             value={inputValue}
-            onFocus={this.toggelOptionList}
+            // onFocus={this.toggelOptionList}
             onBlur={this.toggelOptionList}
             placeholder={((singleSelect && selectedValues.length) || (hidePlaceholder && selectedValues.length)) ? '' : placeholder}
             onKeyDown={this.onArrowKeyNavigation}
