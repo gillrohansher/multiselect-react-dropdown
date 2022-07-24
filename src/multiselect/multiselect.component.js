@@ -85,7 +85,7 @@ export class Multiselect extends React.Component {
 
   componentDidMount() {
 		this.initialSetValue();
-    this.searchWrapper.current.addEventListener("click", this.listenerCallback);
+    //this.searchWrapper.current.addEventListener("click", this.listenerCallback);
   }
 
   componentDidUpdate(prevProps) {
@@ -104,7 +104,7 @@ export class Multiselect extends React.Component {
   }
 
   componentWillUnmount() {
-    this.searchWrapper.current.removeEventListener('click', this.listenerCallback);
+    //this.searchWrapper.current.removeEventListener('click', this.listenerCallback);
   }
 
   // Skipcheck flag - value will be true when the func called from on deselect anything.
@@ -520,7 +520,8 @@ export class Multiselect extends React.Component {
     return (
       <div className={`multiselect-container ${ms.multiSelectContainer} ${disable ? `${ms.disable_ms} disable_ms` : ''}`} id={id || 'multiselectContainerReact'} style={style['multiselectContainer']}>
         <div className={`search-wrapper ${ms.searchWrapper} ${singleSelect ? ms.singleSelect : ''}`} 
-          ref={this.searchWrapper} style={style['searchBox']} 
+          // ref={this.searchWrapper} 
+          style={style['searchBox']} 
           // onClick={singleSelect ? this.toggelOptionList : () => {}}
         >
           {this.renderSelectedList()}
