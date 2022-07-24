@@ -574,7 +574,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
           />
           {(singleSelect || showArrow) && (
             <>
-              {customArrow ? <span className="icon_down_dir">{customArrow}</span> : <img src={DownArrow} className={`icon_cancel icon_down_dir`} />}
+              {customArrow ? <span className="icon_down_dir" style={{ fontSize: '10px' }}>{customArrow}</span> : <img src={DownArrow} className={`icon_cancel icon_down_dir`} />}
             </>
           )}
         </div>
