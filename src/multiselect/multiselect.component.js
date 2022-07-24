@@ -1,6 +1,7 @@
 import React from "react";
 import ms from "./multiselect.component.css";
 import "../assets/closeicon/css/fontello.css";
+import DownArrow from '../assets/svg/downArrow.svg';
 
 const closeIconTypes = {
   circle: 'icon_cancel_circled',
