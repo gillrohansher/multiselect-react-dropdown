@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import ms from "./multiselect.component.css";
 import "../assets/closeicon/css/fontello.css";
 import DownArrow from '../assets/svg/downArrow.svg';
