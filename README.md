@@ -1,8 +1,14 @@
 # REACT MULTISELECT DROPDOWN 
 
-![Version](https://img.shields.io/npm/v/multiselect-react-dropdown.svg) ![Downloads](https://img.shields.io/npm/dw/multiselect-react-dropdown.svg) ![License](https://img.shields.io/npm/l/multiselect-react-dropdown.svg) ![PRs](images/pr.png) ![Tweet](https://img.shields.io/twitter/url/https/twitter.com/ssrigar.svg?style=social)
+[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@master/badge/badge-storybook.svg)](https://multiselect-react-dropdown.vercel.app/?path=/docs/multiselect-dropdown--flat-array)
+![Version](https://img.shields.io/npm/v/multiselect-react-dropdown.svg) 
+![Downloads](https://img.shields.io/npm/dw/multiselect-react-dropdown.svg) 
+![License](https://img.shields.io/npm/l/multiselect-react-dropdown.svg) 
+[![gzip](https://badgen.net/bundlephobia/minzip/multiselect-react-dropdown@2.0.1)](https://bundlephobia.com/result?p=multiselect-react-dropdown@2.0.1)
+![Tweet](https://img.shields.io/twitter/url/https/twitter.com/ssrigar.svg?style=social)
 
 💥💥💥 **React Library for Component Lazyloading. Tiny and Efficient. [Check it Out](https://github.com/srigar/react-lazyloading)** 💥💥💥
+
 
 ## Description   
 
@@ -11,23 +17,32 @@ A React component which provides multi select functionality with various feature
 ![Multiselect](images/dd.png)
 
 
-## Getting Started
+## 🎉🎉 New features in >=2.0.0  
+✨ SSR Support  
+🍃 Light weight  
+🚀 Typescript  
 
-## 1. Installation
+
+
+## 🏳️‍🌈 Getting Started 
+
+## 1. Installation 🔧
 ```
-npm install multiselect-react-dropdown
+npm install multiselect-react-dropdown  
+
+yarn add multiselect-react-dropdown
 ```
 ----
-## 2. Demo
-[React-multi-select-dropdown](https://10xn41w767.codesandbox.io/)
+## 2. Demo 👁️
+[React-multi-select-dropdown](https://multiselect-react-dropdown.vercel.app/?path=/docs/multiselect-dropdown--flat-array)
 
 ----
-## 3. Basic Usage
+## 3. Basic Usage 📑
 ```js
-import { Multiselect } from 'multiselect-react-dropdown';
+import Multiselect from 'multiselect-react-dropdown';
 
 this.state = {
-    options: [{name: 'Srigar', id: 1},{name: 'Sam', id: 2}]
+    options: [{name: 'Option 1️⃣', id: 1},{name: 'Option 2️⃣', id: 2}]
 };
 
 <Multiselect
@@ -49,7 +64,7 @@ onRemove(selectedList, removedItem) {
 
 ----
 
-## 4. Props
+## 4. Props 💬
 
 | Prop  | Type  | Default | Description |
 |:--------- | :---- | :----   |:----  |
@@ -71,17 +86,25 @@ onRemove(selectedList, removedItem) {
 | `caseSensitiveSearch` | `bool` | `false` | Enables case sensitivity on the search field.
 | `closeOnSelect` | `bool` | `true` | Dropdown get closed on select/remove item from options.
 | `id` | `string` | `''` | Id for the multiselect container and input field(In input field it will append '{id}_input').
+| `className` | `string` | `''` | Class for the multiselect container wrapper.
 | `avoidHighlightFirstOption` | `bool` | `false` | Based on flag first option will get highlight whenever optionlist open.
 | `hidePlaceholder` | `bool` | `false` | For true, placeholder will be hidden if there is any selected values in multiselect
 | `disable` | `bool` | `false` | For true, dropdown will be disabled
 | `onSearch` | `function` | `func` | Callback function invoked on search in multiselect, helpful to make api call to load data from api based on search.
 | `loading` | `bool` | `false` | If options is fetching from api, in the meantime, we can show `loading...` message in the list.
 | `loadingMessage` | `any` | `''` | Custom loading message, it can be string or component.
+| `showArrow` | `bool` | `false` | For multiselect dropdown by default arrow wont show at the end, If required based on flag we can display
+| `customArrow` | `any` | `undefined` | For multiselect dropdown custom arrow option
+| `keepSearchTerm` | `bool` | `false` | Whether or not to keep the search value after selecting or removing an item
+| `customCloseIcon` | `ReactNode or string` | `undefined` | Custom close icon and can be string or react component(Check demo for reference)
+| `selectedValueDecorator` | `(string) => ReactNode \| string` | `v => v` | A function that can be used to modify the representation selected value
+| `optionValueDecorator` | `(string) => string` | `v => v` | A function that can be used to modify the representation the available options
 ----
 
 
 
-# 5. `Ref` as a prop
+
+# 5. `Ref` as a prop 📌
 
 By using React.createRef() or useRef(), able to access below methods to get or reset selected values
 
@@ -110,7 +133,7 @@ ref={this.multiselectRef}
 
 ----
 
-## 6. CSS Customization   
+## 6. CSS Customization 🌈
 
 ```css
 {
@@ -142,7 +165,7 @@ ref={this.multiselectRef}
 
 ----
 
-## 7. Close Icons
+## 7. Close Icons ❌
 
 | Name  | Image  |
 |:--------- | :---- |
@@ -153,5 +176,5 @@ ref={this.multiselectRef}
 
 ----
 
-## 8. Licence
+## 8. Licence 📜
 MIT

@@ -1,3 +1,10 @@
+.multiSelectContainer,
+.multiSelectContainer *,
+.multiSelectContainer ::after, 
+.multiSelectContainer ::before {
+  box-sizing: border-box;
+}
+
 .multiSelectContainer {
   position: relative;
   text-align: left;
@@ -6,6 +13,9 @@
 .disable_ms {
   pointer-events: none;
   opacity: 0.5;
+}
+.display-none {
+  display: none;
 }
 .searchWrapper {
   border: 1px solid #cccccc;
@@ -22,18 +32,16 @@
 .multiSelectContainer input:focus {
   outline: none;
 }
-.bgSelected{
-  background-color: rgb(242, 242, 252)!important;
-}
 .chip {
   padding: 4px 10px;
-  background: rgb(242, 242, 252);
+  background: #0096fb;
   margin-right: 5px;
   margin-bottom: 5px;
-  border-radius: 10px;
+  border-radius: 11px;
   display: inline-flex;
   align-items: center;
   font-size: 13px;
+  line-height: 19px;
   color: #fff;
   white-space: nowrap;
 }
@@ -47,9 +55,10 @@
   display: none;
 }
 .closeIcon {
-  font-size: 12px;
+  height: 13px;
+  width: 13px;
   float: right;
-  margin-left: 2px;
+  margin-left: 5px;
   cursor: pointer;
 }
 .optionListContainer {
@@ -73,7 +82,7 @@
   padding: 10px 10px;
 }
 .multiSelectContainer li:hover {
-  background: rgb(242, 242, 252);
+  background: #0096fb;
   color: #fff;
   cursor: pointer;
 }
@@ -85,7 +94,7 @@
   opacity: 0.5;
 }
 .highlightOption {
-  background: rgb(242, 242, 252);
+  background: #0096fb;
   color: #ffffff;
 }
 .displayBlock {
@@ -109,24 +118,16 @@ li.groupHeading {
 li.groupChildEle {
   padding-left: 30px;
 }
-.icon_cancel_circled:before {
-  content: "\e800";
-}
-.icon_cancel:before {
-  content: "\e801";
-}
-.icon_cancel_circled2:before {
-  content: "\e802";
-}
-.icon_window_close:before {
-  content: "\f2d3";
-}
 .icon_down_dir {
   position: absolute;
-  right: 5px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
+  width: 14px;
 }
 .icon_down_dir:before { 
   content: '\e803'; 
+}
+.custom-close {
+  display: flex;
 }
