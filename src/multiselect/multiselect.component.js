@@ -526,7 +526,7 @@ export class Multiselect extends React.Component {
           {this.renderSelectedList()}
           <input
 						type="text"
-						ref={this.searchBox}
+						//ref={this.searchBox}
             className="searchBox"
             id={`${id || 'search'}_input`}
             onChange={this.onChange}
