@@ -6,6 +6,8 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var React = require('react');
 var React__default = _interopDefault(React);
+var reactFontawesome = require('@fortawesome/react-fontawesome');
+var freeSolidSvgIcons = require('@fortawesome/free-solid-svg-icons');
 
 function _inheritsLoose(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
@@ -644,18 +646,17 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
         singleSelect = _this$props11.singleSelect,
         customCloseIcon = _this$props11.customCloseIcon;
     var _this$state5 = this.state,
-        selectedValues = _this$state5.selectedValues,
-        closeIconType = _this$state5.closeIconType;
+        selectedValues = _this$state5.selectedValues;
     return selectedValues.map(function (value, index) {
       return /*#__PURE__*/React__default.createElement("span", {
         className: "chip  " + (singleSelect && 'singleChip') + " " + (_this8.isDisablePreSelectedValues(value) && 'disableSelection'),
         key: index,
         style: style['chips']
-      }, _this8.props.selectedValueDecorator(!isObject ? (value || '').toString() : value[displayValue], value), !_this8.isDisablePreSelectedValues(value) && (!customCloseIcon ? /*#__PURE__*/React__default.createElement("img", {
-        className: "icon_cancel closeIcon",
-        src: closeIconType,
-        onClick: function onClick() {
-          return _this8.onRemoveSelectedItem(value);
+      }, _this8.props.selectedValueDecorator(!isObject ? (value || '').toString() : value[displayValue], value), !_this8.isDisablePreSelectedValues(value) && !singleSelect && (!customCloseIcon ? /*#__PURE__*/React__default.createElement(reactFontawesome.FontAwesomeIcon, {
+        icon: freeSolidSvgIcons.faTimes,
+        color: "#727293",
+        style: {
+          fontSize: '10px'
         }
       }) : /*#__PURE__*/React__default.createElement("i", {
         className: "custom-close",

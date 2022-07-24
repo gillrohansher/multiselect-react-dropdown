@@ -7,6 +7,8 @@ import CloseLine from '../assets/svg/closeLine.svg';
 import CloseSquare from '../assets/svg/closeSquare.svg';
 import DownArrow from '../assets/svg/downArrow.svg';
 import {IMultiselectProps} from "./interface";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const closeIconTypes = {
   circle: CloseCircleDark,
@@ -453,11 +455,8 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     return selectedValues.map((value, index) => (
       <span className={`chip  ${singleSelect && 'singleChip'} ${this.isDisablePreSelectedValues(value) && 'disableSelection'}`} key={index} style={style['chips']}>
         {this.props.selectedValueDecorator(!isObject ? (value || '').toString() : value[displayValue], value)}
-        {!this.isDisablePreSelectedValues(value) && (!customCloseIcon ? <img
-          className="icon_cancel closeIcon"
-          src={closeIconType}
-          onClick={() => this.onRemoveSelectedItem(value)}
-        /> : <i className="custom-close" onClick={() => this.onRemoveSelectedItem(value)}>{customCloseIcon}</i>)}
+        {!this.isDisablePreSelectedValues(value) && !singleSelect && (!customCloseIcon ? <FontAwesomeIcon icon={faTimes} color="#727293" style={{ fontSize: '10px' }} />
+        : <i className="custom-close" onClick={() => this.onRemoveSelectedItem(value)}>{customCloseIcon}</i>)}
       </span>
     ));
   }

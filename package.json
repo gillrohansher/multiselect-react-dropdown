@@ -83,5 +83,8 @@
     "css-what": "5.0.1",
     "glob-parent": "5.1.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.2.0"
+  }
 }
