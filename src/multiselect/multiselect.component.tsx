@@ -369,7 +369,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   }
 
   renderOptionList() {
-    const { groupBy, style, emptyRecordMsg, loading, loadingMessage = 'loading...' } = this.props;
+    const { groupBy, style, emptyRecordMsg, loading, loadingMessage = 'loading...', renderCustomButton } = this.props;
     const { options } = this.state;
     if (loading) {
       return (
@@ -383,6 +383,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
       <ul className={`optionContainer`} style={style['optionContainer']}>
         {options.length === 0 && <span style={style['notFound']} className={`notFound`}>{emptyRecordMsg}</span>}
         {!groupBy ? this.renderNormalOption() : this.renderGroupByOptions()}
+        {renderCustomButton}
       </ul>
     );
   }
