@@ -543,7 +543,8 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
         emptyRecordMsg = _this$props8.emptyRecordMsg,
         loading = _this$props8.loading,
         _this$props8$loadingM = _this$props8.loadingMessage,
-        loadingMessage = _this$props8$loadingM === void 0 ? 'loading...' : _this$props8$loadingM;
+        loadingMessage = _this$props8$loadingM === void 0 ? 'loading...' : _this$props8$loadingM,
+        renderCustomButton = _this$props8.renderCustomButton;
     var options = this.state.options;
 
     if (loading) {
@@ -562,7 +563,7 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
     }, options.length === 0 && /*#__PURE__*/React__default.createElement("span", {
       style: style['notFound'],
       className: "notFound"
-    }, emptyRecordMsg), !groupBy ? this.renderNormalOption() : this.renderGroupByOptions());
+    }, emptyRecordMsg), !groupBy ? this.renderNormalOption() : this.renderGroupByOptions(), renderCustomButton);
   };
 
   _proto.renderGroupByOptions = function renderGroupByOptions() {
