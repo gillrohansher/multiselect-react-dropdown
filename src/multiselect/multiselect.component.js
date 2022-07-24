@@ -9,6 +9,31 @@ const closeIconTypes = {
   cancel: 'icon_cancel'
 };
 
+function useOutsideAlerter(ref, clickEvent) {
+  useEffect(() => {
+      function handleClickOutside(event) {
+          if (ref.current && !ref.current.contains(event.target)) {
+            clickEvent();
+          }
+      }
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+      };
+  }, [ref]);
+}
+
+
+/**
+* Component that alerts if you click outside of it
+*/
+function OutsideAlerter(props) {
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef, props.outsideClick);
+  return <div ref={wrapperRef}>{props.children}</div>;
+}
+
 export class Multiselect extends React.Component {
   constructor(props) {
     super(props);
@@ -47,6 +72,9 @@ export class Multiselect extends React.Component {
     this.resetSelectedValues = this.resetSelectedValues.bind(this);
     this.getSelectedItems = this.getSelectedItems.bind(this);
     this.getSelectedItemsCount = this.getSelectedItemsCount.bind(this);
+    this.hideOnClickOutside = this.hideOnClickOutside.bind(this);
+    this.onCloseOptionList = this.onCloseOptionList.bind(this);
+    this.isVisible = this.isVisible.bind(this);
   }
 
   initialSetValue() {
@@ -85,7 +113,8 @@ export class Multiselect extends React.Component {
 
   componentDidMount() {
 		this.initialSetValue();
-    //this.searchWrapper.current.addEventListener("click", this.listenerCallback);
+    // @ts-ignore
+    this.searchWrapper.current.addEventListener("click", this.listenerCallback);
   }
 
   componentDidUpdate(prevProps) {
@@ -100,11 +129,18 @@ export class Multiselect extends React.Component {
   }
 
   listenerCallback() {
+    // @ts-ignore
     this.searchBox.current.focus();
   }
 
   componentWillUnmount() {
-    //this.searchWrapper.current.removeEventListener('click', this.listenerCallback);
+    // @ts-ignore
+    if (this.optionTimeout) {
+      // @ts-ignore
+      clearTimeout(this.optionTimeout);
+    }
+    // @ts-ignore
+    this.searchWrapper.current.removeEventListener('click', this.listenerCallback);
   }
 
   // Skipcheck flag - value will be true when the func called from on deselect anything.
@@ -513,42 +549,82 @@ export class Multiselect extends React.Component {
       highlightOption: this.props.avoidHighlightFirstOption ? -1 : 0
     });
   }
+  onCloseOptionList() {
+    this.setState({
+      toggleOptionsList: false,
+      highlightOption: this.props.avoidHighlightFirstOption ? -1 : 0,
+      inputValue: ''
+    });
+  }
+
+  onFocus(){
+    if (this.state.toggleOptionsList) {
+      // @ts-ignore
+      clearTimeout(this.optionTimeout);
+    } else {
+      this.toggelOptionList();
+    }
+  }
+
+  onBlur(){
+    this.setState({ inputValue: '' }, this.filterOptionsByInput);
+    // @ts-ignore
+    this.optionTimeout = setTimeout(this.onCloseOptionList, 250);
+  }
+
+  isVisible(elem) {
+    return !!elem && !!( elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length )
+  }
+  hideOnClickOutside() {
+    const element = document.getElementsByClassName('multiselect-container')[0];
+    const outsideClickListener = event => {
+        if (element && !element.contains(event.target) && this.isVisible(element)) {
+          this.toggelOptionList();
+        }
+    }
+    document.addEventListener('click', outsideClickListener)
+  }
 
   renderMultiselectContainer() {
     const { inputValue, toggleOptionsList, selectedValues } = this.state;
-    const { placeholder, style, singleSelect, id, hidePlaceholder, disable, showArrow} = this.props;
+    const { placeholder, style, singleSelect, id, name, hidePlaceholder, disable, showArrow, className, customArrow, hideSelectedList } = this.props;
     return (
-      <div className={`multiselect-container ${ms.multiSelectContainer} ${disable ? `${ms.disable_ms} disable_ms` : ''}`} id={id || 'multiselectContainerReact'} style={style['multiselectContainer']}>
-        <div className={`search-wrapper ${ms.searchWrapper} ${singleSelect ? ms.singleSelect : ''}`} 
-          // ref={this.searchWrapper} 
-          style={style['searchBox']} 
-          // onClick={singleSelect ? this.toggelOptionList : () => {}}
+      <div className={`multiselect-container multiSelectContainer ${disable ? `disable_ms` : ''} ${className || ''}`} id={id || 'multiselectContainerReact'} style={style['multiselectContainer']}>
+        <div className={`search-wrapper searchWrapper ${singleSelect ? 'singleSelect' : ''}`}
+          ref={this.searchWrapper} style={style['searchBox']}
+          onClick={singleSelect ? this.toggelOptionList : () => {}}
         >
-          {this.renderSelectedList()}
+          {!hideSelectedList && this.renderSelectedList()}
           <input
 						type="text"
-						//ref={this.searchBox}
-            className="searchBox"
+						ref={this.searchBox}
+            className={`searchBox ${singleSelect && selectedValues.length ? 'display-none' : ''}`}
             id={`${id || 'search'}_input`}
+	          name={`${name || 'search_name'}_input`}
             onChange={this.onChange}
+            onKeyPress={this.onKeyPress}
             value={inputValue}
-            // onFocus={this.toggelOptionList}
-            onBlur={this.toggelOptionList}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
             placeholder={((singleSelect && selectedValues.length) || (hidePlaceholder && selectedValues.length)) ? '' : placeholder}
             onKeyDown={this.onArrowKeyNavigation}
             style={style['inputField']}
             autoComplete="off"
             disabled={singleSelect || disable}
           />
-          <i
-            className={`icon_cancel ${ms.icon_down_dir}`}
-            style={toggleOptionsList ? { transform: 'rotate(180deg)', top:'26%' } : {}}
-          />
+          {(singleSelect || showArrow) && (
+            <>
+              {customArrow ? <span className="icon_down_dir">{customArrow}</span> : <img src={DownArrow} className={`icon_cancel icon_down_dir`} />}
+            </>
+          )}
         </div>
         <div
-          className={`optionListContainer ${ms.optionListContainer} ${
-            toggleOptionsList ? ms.displayBlock : ms.displayNone
+          className={`optionListContainer ${
+            toggleOptionsList ? 'displayBlock' : 'displayNone'
           }`}
+          onMouseDown={(e) => {
+            e.preventDefault();
+          }}
         >
           {this.renderOptionList()}
         </div>
@@ -557,7 +633,11 @@ export class Multiselect extends React.Component {
   }
 
   render() {
-    return this.renderMultiselectContainer();
+    return (
+      <OutsideAlerter outsideClick={this.onCloseOptionList}>
+        {this.renderMultiselectContainer()}
+      </OutsideAlerter>
+    );
   }
 }
 
