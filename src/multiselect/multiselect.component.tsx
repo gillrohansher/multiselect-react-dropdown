@@ -519,7 +519,6 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     if (this.state.toggleOptionsList) {
       // @ts-ignore
       clearTimeout(this.optionTimeout);
-      this.toggelOptionList();
     } else {
       this.toggelOptionList();
     }

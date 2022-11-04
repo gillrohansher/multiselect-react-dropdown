@@ -741,7 +741,6 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
     if (this.state.toggleOptionsList) {
       // @ts-ignore
       clearTimeout(this.optionTimeout);
-      this.toggelOptionList();
     } else {
       this.toggelOptionList();
     }
