@@ -642,9 +642,6 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
         selectedValues = _this$state5.selectedValues;
     return selectedValues.map(function (value, index) {
       return /*#__PURE__*/React__default.createElement("span", {
-        onClick: function onClick() {
-          return _this8.toggelOptionList();
-        },
         className: "chip  " + (singleSelect && 'singleChip') + " " + (_this8.isDisablePreSelectedValues(value) && 'disableSelection'),
         key: index,
         style: style['chips']
@@ -737,8 +734,6 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
     if (this.state.toggleOptionsList) {
       // @ts-ignore
       clearTimeout(this.optionTimeout);
-    } else {
-      this.toggelOptionList();
     }
   };
 
@@ -792,7 +787,8 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
     }, /*#__PURE__*/React__default.createElement("div", {
       className: "search-wrapper searchWrapper " + (singleSelect ? 'singleSelect' : ''),
       ref: this.searchWrapper,
-      style: style['searchBox']
+      style: style['searchBox'],
+      onClick: singleSelect ? this.toggelOptionList : function () {}
     }, !hideSelectedList && this.renderSelectedList(), /*#__PURE__*/React__default.createElement("input", {
       type: "text",
       ref: this.searchBox,

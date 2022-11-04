@@ -453,7 +453,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
     const { isObject = false, displayValue, style, singleSelect, customCloseIcon } = this.props;
     const { selectedValues, closeIconType } = this.state;
     return selectedValues.map((value, index) => (
-      <span onClick={()=>this.toggelOptionList()} className={`chip  ${singleSelect && 'singleChip'} ${this.isDisablePreSelectedValues(value) && 'disableSelection'}`} key={index} style={style['chips']}>
+      <span className={`chip  ${singleSelect && 'singleChip'} ${this.isDisablePreSelectedValues(value) && 'disableSelection'}`} key={index} style={style['chips']}>
         {this.props.selectedValueDecorator(!isObject ? (value || '').toString() : value[displayValue], value)}
         {!this.isDisablePreSelectedValues(value) && !singleSelect && (!customCloseIcon ? <FontAwesomeIcon icon={faTimes} color="#727293" style={{ fontSize: '10px' }} />
         : <i className="custom-close" onClick={() => this.onRemoveSelectedItem(value)}>{customCloseIcon}</i>)}
@@ -520,7 +520,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
       // @ts-ignore
       clearTimeout(this.optionTimeout);
     } else {
-      this.toggelOptionList();
+      //this.toggelOptionList();
     }
   }
 
@@ -551,7 +551,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
       <div className={`multiselect-container multiSelectContainer ${disable ? `disable_ms` : ''} ${className || ''}`} id={id || 'multiselectContainerReact'} style={style['multiselectContainer']}>
         <div className={`search-wrapper searchWrapper ${singleSelect ? 'singleSelect' : ''}`}
           ref={this.searchWrapper} style={style['searchBox']}
-          //onClick={singleSelect ? this.toggelOptionList : () => {}}
+          onClick={singleSelect ? this.toggelOptionList : () => {}}
         >
           {!hideSelectedList && this.renderSelectedList()}
           <input
