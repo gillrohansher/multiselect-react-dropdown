@@ -741,6 +741,7 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
     if (this.state.toggleOptionsList) {
       // @ts-ignore
       clearTimeout(this.optionTimeout);
+      this.toggelOptionList();
     } else {
       this.toggelOptionList();
     }
@@ -806,6 +807,7 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
       name: (name || 'search_name') + "_input",
       onChange: this.onChange,
       onKeyPress: this.onKeyPress,
+      onClick: this.toggelOptionList,
       value: inputValue,
       onFocus: this.onFocus,
       onBlur: this.onBlur,
