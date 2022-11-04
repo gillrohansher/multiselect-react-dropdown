@@ -642,6 +642,9 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
         selectedValues = _this$state5.selectedValues;
     return selectedValues.map(function (value, index) {
       return /*#__PURE__*/React__default.createElement("span", {
+        onClick: function onClick() {
+          return _this8.toggelOptionList();
+        },
         className: "chip  " + (singleSelect && 'singleChip') + " " + (_this8.isDisablePreSelectedValues(value) && 'disableSelection'),
         key: index,
         style: style['chips']
