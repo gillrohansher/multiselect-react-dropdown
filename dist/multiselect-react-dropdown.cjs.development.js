@@ -815,7 +815,7 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
       onKeyDown: this.onArrowKeyNavigation,
       style: style['inputField'],
       autoComplete: "off",
-      disabled: singleSelect || disable
+      disabled: disable
     }), (singleSelect || showArrow) && /*#__PURE__*/React__default.createElement(React__default.Fragment, null, customArrow ? /*#__PURE__*/React__default.createElement("span", {
       className: "icon_down_dir"
     }, customArrow) : /*#__PURE__*/React__default.createElement("img", {

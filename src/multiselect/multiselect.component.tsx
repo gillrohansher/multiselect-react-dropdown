@@ -571,7 +571,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
             onKeyDown={this.onArrowKeyNavigation}
             style={style['inputField']}
             autoComplete="off"
-            disabled={singleSelect || disable}
+            disabled={disable}
           />
           {(singleSelect || showArrow) && (
             <>
