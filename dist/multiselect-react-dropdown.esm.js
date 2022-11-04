@@ -800,7 +800,6 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
       name: (name || 'search_name') + "_input",
       onChange: this.onChange,
       onKeyPress: this.onKeyPress,
-      onClick: this.toggelOptionList,
       value: inputValue,
       onFocus: this.onFocus,
       onBlur: this.onBlur,
