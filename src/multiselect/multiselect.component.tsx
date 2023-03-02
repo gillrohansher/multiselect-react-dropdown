@@ -568,7 +568,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
             onBlur={this.onBlur}
             placeholder={((singleSelect && selectedValues.length) || (hidePlaceholder && selectedValues.length)) ? '' : placeholder}
             onKeyDown={this.onArrowKeyNavigation}
-            style={style['inputField']}
+            style={{...style['inputField'], ...{cursor: 'pointer'}}}
             autoComplete="off"
             disabled={disable}
             //onClick={singleSelect ? this.toggelOptionList : () => {}}
