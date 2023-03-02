@@ -794,8 +794,7 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
     }, /*#__PURE__*/React__default.createElement("div", {
       className: "search-wrapper searchWrapper " + (singleSelect ? 'singleSelect' : ''),
       ref: this.searchWrapper,
-      style: style['searchBox'],
-      onClick: singleSelect ? this.toggelOptionList : function () {}
+      style: style['searchBox']
     }, !hideSelectedList && this.renderSelectedList(), /*#__PURE__*/React__default.createElement("input", {
       type: "text",
       ref: this.searchBox,
