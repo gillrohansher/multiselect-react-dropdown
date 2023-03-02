@@ -570,6 +570,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
             style={style['inputField']}
             autoComplete="off"
             disabled={disable}
+            onClick={singleSelect ? this.toggelOptionList : () => {}}
           />
           {(singleSelect || showArrow) && (
             <>
