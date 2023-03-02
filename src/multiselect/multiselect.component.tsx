@@ -516,13 +516,12 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   }
 
   onFocus(){
-    this.toggelOptionList();
-    // if (this.state.toggleOptionsList) {
-    //   // @ts-ignore
-    //   clearTimeout(this.optionTimeout);
-    // } else {
-    //   this.toggelOptionList();
-    // }
+    if (this.state.toggleOptionsList) {
+      // @ts-ignore
+      clearTimeout(this.optionTimeout);
+    } else {
+      //this.toggelOptionList();
+    }
   }
 
   onBlur(){
@@ -568,10 +567,10 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
             onBlur={this.onBlur}
             placeholder={((singleSelect && selectedValues.length) || (hidePlaceholder && selectedValues.length)) ? '' : placeholder}
             onKeyDown={this.onArrowKeyNavigation}
-            style={{...style['inputField'], ...{cursor: 'pointer'}}}
+            style={style['inputField']}
             autoComplete="off"
             disabled={disable}
-            //onClick={singleSelect ? this.toggelOptionList : () => {}}
+            onClick={singleSelect ? this.toggelOptionList : () => {}}
           />
           {(singleSelect || showArrow) && (
             <>

@@ -9,23 +9,6 @@ var React__default = _interopDefault(React);
 var reactFontawesome = require('@fortawesome/react-fontawesome');
 var freeSolidSvgIcons = require('@fortawesome/free-solid-svg-icons');
 
-function _extends() {
-  _extends = Object.assign ? Object.assign.bind() : function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-  return _extends.apply(this, arguments);
-}
-
 function _inheritsLoose(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
   subClass.prototype.constructor = subClass;
@@ -755,12 +738,10 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
   };
 
   _proto.onFocus = function onFocus() {
-    this.toggelOptionList(); // if (this.state.toggleOptionsList) {
-    //   // @ts-ignore
-    //   clearTimeout(this.optionTimeout);
-    // } else {
-    //   this.toggelOptionList();
-    // }
+    if (this.state.toggleOptionsList) {
+      // @ts-ignore
+      clearTimeout(this.optionTimeout);
+    }
   };
 
   _proto.onBlur = function onBlur() {
@@ -828,11 +809,10 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
       onBlur: this.onBlur,
       placeholder: singleSelect && selectedValues.length || hidePlaceholder && selectedValues.length ? '' : placeholder,
       onKeyDown: this.onArrowKeyNavigation,
-      style: _extends({}, style['inputField'], {
-        cursor: 'pointer'
-      }),
+      style: style['inputField'],
       autoComplete: "off",
-      disabled: disable
+      disabled: disable,
+      onClick: singleSelect ? this.toggelOptionList : function () {}
     }), (singleSelect || showArrow) && /*#__PURE__*/React__default.createElement(React__default.Fragment, null, customArrow ? /*#__PURE__*/React__default.createElement("span", {
       className: "icon_down_dir"
     }, customArrow) : /*#__PURE__*/React__default.createElement("img", {
