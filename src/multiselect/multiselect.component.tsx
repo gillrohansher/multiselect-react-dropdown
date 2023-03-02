@@ -520,7 +520,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
       // @ts-ignore
       clearTimeout(this.optionTimeout);
     } else {
-      //this.toggelOptionList();
+      this.toggelOptionList();
     }
   }
 
@@ -570,7 +570,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
             style={style['inputField']}
             autoComplete="off"
             disabled={disable}
-            onClick={singleSelect ? this.toggelOptionList : () => {}}
+            //onClick={singleSelect ? this.toggelOptionList : () => {}}
           />
           {(singleSelect || showArrow) && (
             <>
