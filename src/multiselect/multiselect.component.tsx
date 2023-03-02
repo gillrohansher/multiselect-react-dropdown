@@ -516,12 +516,13 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
   }
 
   onFocus(){
-    if (this.state.toggleOptionsList) {
-      // @ts-ignore
-      clearTimeout(this.optionTimeout);
-    } else {
-      this.toggelOptionList();
-    }
+    this.toggelOptionList();
+    // if (this.state.toggleOptionsList) {
+    //   // @ts-ignore
+    //   clearTimeout(this.optionTimeout);
+    // } else {
+    //   this.toggelOptionList();
+    // }
   }
 
   onBlur(){

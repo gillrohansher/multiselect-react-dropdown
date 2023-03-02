@@ -738,12 +738,12 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
   };
 
   _proto.onFocus = function onFocus() {
-    if (this.state.toggleOptionsList) {
-      // @ts-ignore
-      clearTimeout(this.optionTimeout);
-    } else {
-      this.toggelOptionList();
-    }
+    this.toggelOptionList(); // if (this.state.toggleOptionsList) {
+    //   // @ts-ignore
+    //   clearTimeout(this.optionTimeout);
+    // } else {
+    //   this.toggelOptionList();
+    // }
   };
 
   _proto.onBlur = function onBlur() {
