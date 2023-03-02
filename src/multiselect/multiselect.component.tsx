@@ -520,7 +520,7 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
       // @ts-ignore
       clearTimeout(this.optionTimeout);
     } else {
-      this.toggelOptionList();
+      //this.toggelOptionList();
     }
   }
 
@@ -552,6 +552,8 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
         <div className={`search-wrapper searchWrapper ${singleSelect ? 'singleSelect' : ''}`}
           ref={this.searchWrapper} style={style['searchBox']}
           onClick={singleSelect ? this.toggelOptionList : () => {}}
+          onBlur={()=> this.onCloseOptionList//this.onBlur
+            }
         >
           {!hideSelectedList && this.renderSelectedList()}
           <input
@@ -563,14 +565,16 @@ export class Multiselect extends React.Component<IMultiselectProps, any> {
             onChange={this.onChange}
             onKeyPress={this.onKeyPress}
             value={inputValue}
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
+            // onFocus={()=> //this.onFocus
+            // }
+            onBlur={()=> this.onCloseOptionList//this.onBlur
+            }
             placeholder={((singleSelect && selectedValues.length) || (hidePlaceholder && selectedValues.length)) ? '' : placeholder}
             onKeyDown={this.onArrowKeyNavigation}
             style={style['inputField']}
             autoComplete="off"
             disabled={disable}
-            //onClick={singleSelect ? this.toggelOptionList : () => {}}
+            onClick={singleSelect ? this.toggelOptionList : () => {}}
           />
           {(singleSelect || showArrow) && (
             <>
