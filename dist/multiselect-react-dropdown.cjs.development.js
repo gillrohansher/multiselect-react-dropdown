@@ -741,6 +741,8 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
     if (this.state.toggleOptionsList) {
       // @ts-ignore
       clearTimeout(this.optionTimeout);
+    } else {
+      this.toggelOptionList();
     }
   };
 
@@ -794,7 +796,8 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
     }, /*#__PURE__*/React__default.createElement("div", {
       className: "search-wrapper searchWrapper " + (singleSelect ? 'singleSelect' : ''),
       ref: this.searchWrapper,
-      style: style['searchBox']
+      style: style['searchBox'],
+      onClick: singleSelect ? this.toggelOptionList : function () {}
     }, !hideSelectedList && this.renderSelectedList(), /*#__PURE__*/React__default.createElement("input", {
       type: "text",
       ref: this.searchBox,
@@ -810,8 +813,7 @@ var Multiselect = /*#__PURE__*/function (_React$Component) {
       onKeyDown: this.onArrowKeyNavigation,
       style: style['inputField'],
       autoComplete: "off",
-      disabled: disable,
-      onClick: singleSelect ? this.toggelOptionList : function () {}
+      disabled: disable
     }), (singleSelect || showArrow) && /*#__PURE__*/React__default.createElement(React__default.Fragment, null, customArrow ? /*#__PURE__*/React__default.createElement("span", {
       className: "icon_down_dir"
     }, customArrow) : /*#__PURE__*/React__default.createElement("img", {
